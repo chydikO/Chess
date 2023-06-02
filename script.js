@@ -1,4 +1,18 @@
 "use strict";
+let map = Array();
+function initMap() {
+    //map[x][y];
+    map = [
+        ["R", "P"," ", " "," ", " ","p", "r"],
+        ["N", "P"," ", " "," ", " ","p", "n"],
+        ["B", "P"," ", " "," ", " ","p", "b"],
+        ["Q", "P"," ", " "," ", " ","p", "q"],
+        ["K", "P"," ", " "," ", " ","p", "k"],
+        ["B", "P"," ", " "," ", " ","p", "b"],
+        ["N", "P"," ", " "," ", " ","p", "n"],
+        ["R", "P"," ", " "," ", " ","p", "r"]
+    ];
+}
 function showMap() {
     let html = "<table border='1' cellpadding='2' cellspacing='0'>";
     for (let y = 7; y >= 0;  y--) {
@@ -7,7 +21,9 @@ function showMap() {
         html += "<td>&nbsp;" + y + "&nbsp;</td>";
         for (let x = 0; x <= 7; x++) {
             let colorBg = (x + y) % 2 ?  "#eeffee" : "#abcdef";
-            html += "<td style='height: 50px; width: 50px; background-color: " + colorBg + "'></td>";
+            html += "<td style='height: 50px; width: 50px; background-color: " + colorBg + "; text-align: center'>";
+            html += map[x][y];
+            html += "</td>";
         }
         html += "</tr>";
     }
@@ -19,4 +35,6 @@ function showMap() {
     html += "</tr>";
     document.getElementById("board").innerHTML = html;
 }
+
+initMap();
 showMap();

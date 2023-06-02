@@ -1,5 +1,7 @@
 "use strict";
 let map = Array();
+let inf = Array();
+
 function initMap() {
     //map[x][y];
     map = [
@@ -11,6 +13,20 @@ function initMap() {
         ["B", "P"," ", " "," ", " ","p", "b"],
         ["N", "P"," ", " "," ", " ","p", "n"],
         ["R", "P"," ", " "," ", " ","p", "r"]
+    ];
+}
+
+function initTop() {
+    //map[x][y];
+    inf = [
+        [" ", " "," ", " "," ", " "," ", " "],
+        [" ", " "," ", " "," ", " "," ", " "],
+        [" ", " "," ", " "," ", " "," ", " "],
+        [" ", " "," ", " "," ", " "," ", " "],
+        [" ", "1","2", "2"," ", " "," ", " "],
+        [" ", " "," ", " "," ", " "," ", " "],
+        [" ", " "," ", " "," ", " "," ", " "],
+        [" ", " "," ", " "," ", " "," ", " "]
     ];
 }
 
@@ -28,12 +44,17 @@ function figureToHtml(figure) {
 
 function showMap() {
     let html = "<table border='1' cellpadding='2' cellspacing='0'>";
+    let colorBg;
     for (let y = 7; y >= 0;  y--) {
         html += "<tr>";
         //TODO: need replace &nbsp to style
         html += "<td>&nbsp;" + y + "&nbsp;</td>";
         for (let x = 0; x <= 7; x++) {
-            let colorBg = (x + y) % 2 ?  "#eeffee" : "#abcdef";
+            if (inf[x][y] === ' ') {
+                colorBg = (x + y) % 2 ?  "#eeffee" : "#abcdef";
+            } else {
+                colorBg = inf[x][y] === '1' ?  "#ffaaaa" : "#aaffaa";
+            }
             html += "<td style=" +
                 "'height: 50px;" +
                 "width: 50px; background-color: " + colorBg + "; " +
@@ -52,6 +73,6 @@ function showMap() {
     html += "</tr>";
     document.getElementById("board").innerHTML = html;
 }
-
+initTop();
 initMap();
 showMap();

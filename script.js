@@ -1,6 +1,7 @@
 "use strict";
 let map = Array();
 let inf = Array();
+let moveColor = "white";
 
 function initMap() {
     //map[x][y];
@@ -16,18 +17,41 @@ function initMap() {
     ];
 }
 
-function initTop() {
+function initInf() {
     //map[x][y];
     inf = [
-        [" ", " "," ", " "," ", " "," ", " "],
-        [" ", " "," ", " "," ", " "," ", " "],
-        [" ", " "," ", " "," ", " "," ", " "],
-        [" ", " "," ", " "," ", " "," ", " "],
-        [" ", "1","2", "2"," ", " "," ", " "],
-        [" ", " "," ", " "," ", " "," ", " "],
-        [" ", " "," ", " "," ", " "," ", " "],
-        [" ", " "," ", " "," ", " "," ", " "]
+        [" "," "," "," "," ", " "," "," "],
+        [" "," "," "," "," ", " "," "," "],
+        [" "," "," "," "," ", " "," "," "],
+        [" "," "," "," "," ", " "," "," "],
+        [" "," "," "," "," ", " "," "," "],
+        [" "," "," "," "," ", " "," "," "],
+        [" "," "," "," "," ", " "," "," "],
+        [" "," "," "," "," ", " "," "," "]
     ];
+}
+
+function getColor(x, y) {
+    let figure = map[x][y];
+    if (figure === " ") return "";
+    return figure.toUpperCase() === figure ? "white" : "black";
+}
+
+function markMovesFrom() {
+    function canMoveFrom(x, y) {
+        if (getColor(x, y) === moveColor) {
+            return true;
+        }
+        return false;
+    }
+    initInf();
+    for (let x = 0; x <= 7; x++) {
+        for (let y = 0; y <= 7 ; y++) {
+            if (canMoveFrom(x, y)) {
+                inf[x][y] = "1";
+            }
+        }
+    }
 }
 
 function figureToHtml(figure) {
@@ -73,6 +97,6 @@ function showMap() {
     html += "</tr>";
     document.getElementById("board").innerHTML = html;
 }
-initTop();
 initMap();
+markMovesFrom();
 showMap();
